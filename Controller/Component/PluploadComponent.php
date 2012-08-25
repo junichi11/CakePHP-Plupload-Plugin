@@ -3,27 +3,24 @@
  * CakePHP Plupload Plugin
  * Pluplaod Component
  * Copyright (c) 2011 junichi11
- * 
- * CakePHP version 1.3+
+ *
+ * CakePHP version 2.0+
  * PHP version 5.3+
- * 
+ *
  * @author junichi11
  * @license MIT License
  */
-class PluploadComponent extends Object{
-	
-	public $components = array('Session');
-	
-	//===============================================
-	// method
-	//===============================================
+class PluploadComponent extends Component{
+
+	public $components = array('Session', 'RequestHandler');
+
 	/**
 	 * setUploaderOptions
 	 * @param array $options uploader's option
-	 * @return boolean 
+	 * @return boolean
 	 */
-	public function setUploaderOptions($options = array()){
-		if(!empty($options)){
+	public function setUploaderOptions($options = array()) {
+		if (!empty($options)) {
 			$this->Session->write('Plupload.Uploader', $options);
 			return true;
 		}
