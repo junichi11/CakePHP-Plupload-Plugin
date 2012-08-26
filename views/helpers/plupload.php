@@ -4,15 +4,15 @@
  * PluploadHelper
  * CakePHP version 1.3+
  * PHP version 5.3+
- * 
+ *
  * 2011 Copyright(c) junichi11
  * @author junichi11
  * @license MIT License
- * 
+ *
  */
 class PluploadHelper extends AppHelper{
 	public $helpers = array('Html', 'Form', 'Session', 'Js' => array('Jquery'));
-	
+
 	/**
 	 * Look following url.
 	 * http://www.plupload.com/documentation.php
@@ -22,7 +22,7 @@ class PluploadHelper extends AppHelper{
 		'widget_url' => '/plupload/plupload/widget',
 		'asset_path' => '/plupload/pl/',
 		'locale' => '',
-		
+
 		'runtimes' => 'gears,html5,flash,browserplus,silverlight,html4',
 		'url' => "/plupload/plupload/upload",
 		'max_file_size' => '30mb',
@@ -41,7 +41,7 @@ class PluploadHelper extends AppHelper{
 		'multipart_params' => array(),
 		'required_features' => '',
 		'headers' => '',
-		// Queue widget specific option 
+		// Queue widget specific option
 		'preinit' => '',
 		'dragdrop' => '',
 		'rename' => true,
@@ -49,7 +49,7 @@ class PluploadHelper extends AppHelper{
 		'urlstream_upload' => '',
 	);
 	public $view = null;
-	
+
 	//===============================================
 	// callback method
 	//===============================================
@@ -64,12 +64,12 @@ class PluploadHelper extends AppHelper{
 			$this->settings['silverlight_xap_url'] = $this->settings['asset_path'].'plupload.silverlight.xap';
 		}
 	}
-	
+
 	/**
 	 * loadAsset
 	 * Load CSS & JS
 	 * @param type $widget
-	 * @param type $option 
+	 * @param type $option
 	 */
 	public function loadAsset($widget = 'jqueryui', $option = array('inline' => false)){
 		$asset_path = $this->settings['asset_path'];
@@ -98,10 +98,10 @@ class PluploadHelper extends AppHelper{
 				break;
 		}
 	}
-	
+
 	/**
 	 * Get Plupload options
-	 * @return json 
+	 * @return json
 	 */
 	public function getOptions(){
 		$options = Set::filter($this->settings);
@@ -109,9 +109,9 @@ class PluploadHelper extends AppHelper{
 		unset($options['asset_path']);
 		unset($options['locale']);
 		return $this->Js->object($options);
-		
+
 	}
-	
+
 	/**
 	 * loadWidget
 	 * @param string $ui widget type
@@ -119,8 +119,8 @@ class PluploadHelper extends AppHelper{
 	 * -width
 	 * -height
 	 * -frameborder
-	 * -escape 
-	 * @return string <iframe> 
+	 * -escape
+	 * @return string <iframe>
 	 */
 	public function loadWidget($ui = 'jqueryui', $option = array()){
 		switch($ui){
@@ -145,7 +145,7 @@ class PluploadHelper extends AppHelper{
 		return $this->Html->tag(
 			'iframe',
 			'',
-			array('src' => $this->settings['widget_url']. DS. $ui, 'width' => $width, 'height' => $height, 'frameborder' => $frameborder, 'escape' => $escape)
+			array('src' => Router::url($this->settings['widget_url']. "/". $ui, true), 'width' => $width, 'height' => $height, 'frameborder' => $frameborder, 'escape' => $escape)
 		);
 	}
 }

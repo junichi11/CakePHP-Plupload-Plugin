@@ -6,7 +6,7 @@
 		<?php __('Plupload'); ?>
 	</title>
 	<?php
-		$pluginWebroot = App::pluginPath('plupload')."webroot".DS;
+		$pluginWebroot = App::pluginPath('plupload')."webroot/";
 		//===============================================
 		// meta
 		//===============================================
@@ -14,7 +14,7 @@
 		//===============================================
 		// CSS
 		//===============================================
-		$pattern = $pluginWebroot."jquery-ui".DS."css".DS."*".DS."*.css";
+		$pattern = $pluginWebroot."jquery-ui/css/*/*.css";
 		$csss = glob($pattern);
 		foreach($csss as $css){
 			$css = str_replace($pluginWebroot, "", $css);
@@ -23,7 +23,7 @@
 		//===============================================
 		// javascript
 		//===============================================
-		$pattern = $pluginWebroot."jquery-ui".DS."js".DS."*.js";
+		$pattern = $pluginWebroot."jquery-ui/js/*.js";
 		$scripts = glob($pattern);
 		foreach($scripts as $script){
 			$script = str_replace($pluginWebroot, "", $script);
