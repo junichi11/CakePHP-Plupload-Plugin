@@ -1,0 +1,11 @@
+{
+    "name": "junichi11/Plupload",
+    "type": "cakephp-plugin",
+    "description": "CakePHP Plugin for plupload",
+    "homepage": "https://github.com/junichi11/CakePHP-Plupload-Plugin",
+    "license": "MIT",
+    "require": {
+        "php": ">=5.3.0",
+        "composer/installers": "*"
+    }
+}
