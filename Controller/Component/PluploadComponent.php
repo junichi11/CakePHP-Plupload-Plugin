@@ -1,7 +1,7 @@
 <?php
 /**
  * CakePHP Plupload Plugin
- * Pluplaod Component
+ * Plupload Component
  * Copyright (c) 2011 junichi11
  *
  * CakePHP version 2.0+
