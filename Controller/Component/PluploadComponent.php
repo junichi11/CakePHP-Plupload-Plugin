@@ -101,6 +101,10 @@ class PluploadComponent extends Component{
 		return json_encode($options);
 	}
 
+	public function isPluploadRequest() {
+		return isset($_REQUEST['name']);
+	}
+
 	/**
 	 * Return an unique filename if chunking is disabled,
 	 * else we return given filename
