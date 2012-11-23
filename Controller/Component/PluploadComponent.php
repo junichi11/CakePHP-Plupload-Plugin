@@ -10,6 +10,9 @@
  * @author junichi11
  * @license MIT License
  */
+
+App::uses('File', 'Utility');
+
 class PluploadComponent extends Component{
 
 	public $components = array('Session', 'RequestHandler');
@@ -31,7 +34,7 @@ class PluploadComponent extends Component{
 	 * Upload the file send by Plupload.
 	 * @return array - If the all chunk have been uploaded
 	 *               - Response (in Json) that can contain error message if error occured
-	 *               - Path of the file
+	 *               - FileInformation
 	 */
 	public function upload() {
 		$uploadFinished = false;
@@ -62,7 +65,27 @@ class PluploadComponent extends Component{
 			$response = $error;
 		}
 
-		return array($uploadFinished, $response, $filePath);
+		return array($uploadFinished, $response, $this->_getFileInfos($filePath));
+	}
+
+	/**
+	 * Return file information.
+	 * The data returned is the same form as the data returned in a classic upload
+	 * @param string $file
+	 * @return array
+	 */
+	protected function _getFileInfos($file) {
+		$fileUtility = new File($file);
+
+		$infos = array('file' => array(
+			'name' => $_REQUEST['name'],
+			'tmp_name' => $file,
+			'size' => $fileUtility->size(),
+			'type' => $fileUtility->mime(),
+			'error' => 0
+		));
+
+		return $infos;
 	}
 
 	/**

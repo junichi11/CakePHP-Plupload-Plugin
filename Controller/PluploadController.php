@@ -23,17 +23,20 @@ class PluploadController extends PluploadAppController {
  */
 	public function upload() {
 		parent::upload();
-		list($uploadFinished, $response, $filePath) = $this->Plupload->upload();
+		$response = '';
+		if (isset($_REQUEST['name'])) {
+			list($uploadFinished, $response, $file) = $this->Plupload->upload();
 
-		if ($uploadFinished) {
-			$this->getEventManager()->dispatch(new CakeEvent(
-				'Plupload.afterFileCompletelyUploaded',
-				$this,
-				array('filePath' => $filePath, 'user' => $this->Auth->user())
-			));
+			if ($uploadFinished) {
+				$this->getEventManager()->dispatch(new CakeEvent(
+					'Plupload.afterFileCompletelyUploaded',
+					$this,
+					array('file' => $file, 'user' => $this->Auth->user())
+				));
+			}
+
+			$this->set(compact('response'));
 		}
-
-		$this->set(compact('response'));
 	}
 
 /**
